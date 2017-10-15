@@ -1,32 +1,54 @@
 ### Brief
-Easy to play with yosgo-lina
-* [x] initialize: Initialize api resquest
-* [ ] createrProduct: Create your own proudct
-* [ ] createGroup: Create a group
-* [x] orderCreate: Join the group and create a order
-* [ ] createPayment: Create a payment for certain order
+Easy to play with yosgo-lina. You can
+* [x] `initialize`: Initialize api resquest
+* [ ] `createBrand`: Create your brands. Each brand has own products.
+* [ ] `fetchBrand`: Get your exist own brands
+* [ ] `createrProduct`: Create your own proudct
+* [ ] `fetchProduct`: Get your exist products
+* [ ] `createGroup`: Create a group
+* [ ] `fetchGroup`: Get your exist groups
+* [x] `orderCreate`: Join the group and create a order
+* [ ] `fetchOrders`: Get your exist orders
+* [x] `createPayment`: Create a payment for certain order
+* [ ] `fetchPayments`: Get your exist payments
 
 ### Before starting
 
-1. Get the yosgo developer member to get yosgo apikey
-2. Keep the apikey safe. Don't show on the frontEnd or send request on frontEnd
+1. Sign up yosgo developer to get apiKey.
+2. Keep the apikey safe and use at server side.
 
-### Demo
+### Usage
 
-1. install
-```
-yarn add yosgo-lina
-```
+Note: Using express generator and pug be view engine. Install this module `yarn add yosgo-lina`
 
-2. import and initialize
 ```
-import yosgo from 'yosgo-lina';
-let yosgo_SDK = new yosgo('APIURL', 'YOURAPIKEY');
-```
+//--Step.1 Import and initialize
+import yosgo from 'yosgo';
+const yosgo_SDK = new yosgo('API_URL',YOUR_API_KEY);
 
-3. orderCreate
-```
-yosgo_SDK.orderCreate(PRODUCTID, GROUPID, REGISTRATION, EXTRAREGISTRATION, QUANTITY);
+//--Step.2 Chain methods
+//Pass prodcutId, groupId, registartion, extraRegistration, quantity to `orderCreate()`.
+//Pass orderId to `paymentCreate()`.
+//Chain two method by nesting promise
+new Promise((resolve, reject) => {
+  resolve(yosgo_SDK.orderCreate(productId, groupId, registration, extraRegistration, quantity));
+}).then((response) => {
+  new Promise((resolve, reject) => {
+    //Here the response is `orderId` returned from orderCreate()
+    resolve(yosgo_SDK.paymentCreate(response))
+  })
+  .then((response) => {
+    //Here the response is payment html form. Using `document.write()` to redirect payment page.
+    //The following view is take the response to `payment` page
+    res.render('payment', {form: response});
+  })
+})
+
+//--Step.3 Go payment
+small=Redirect to ecpay
+div(data=form id="data")
+script.
+  document.write(document.getElementById('data').getAttribute('data'));
 ```
 
 ### Todos
@@ -45,3 +67,8 @@ yosgo_SDK.orderCreate(PRODUCTID, GROUPID, REGISTRATION, EXTRAREGISTRATION, QUANT
 * [Classes](https://googlechrome.github.io/samples/classes-es6/)
 * [Npm link](https://docs.npmjs.com/cli/link)
 * [Npm package rename](https://stackoverflow.com/questions/28371669/renaming-a-published-npm-module)
+* [Promise note](http://www.cnblogs.com/rubylouvre/p/3495286.html)
+
+
+### Dev note
+* Payment request should use at yosgo api production env.
