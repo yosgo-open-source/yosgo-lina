@@ -2,20 +2,21 @@
 Easy to play with yosgo-lina. You can
 * [x] `initialize`: Initialize api resquest
 * [ ] `createBrand`: Create your brands. Each brand has own products.
-* [ ] `fetchBrand`: Get your exist own brands
+* [ ] `brandFetch`: Get your exist own brands
 * [ ] `createrProduct`: Create your own proudct
-* [ ] `fetchProduct`: Get your exist products
+* [x] `productFetch`: Get your exist products
 * [ ] `createGroup`: Create a group
-* [ ] `fetchGroup`: Get your exist groups
+* [ ] `groupFetch`: Get your exist groups
 * [x] `orderCreate`: Join the group and create a order
-* [ ] `fetchOrders`: Get your exist orders
+* [ ] `orderFetch`: Get your exist orders
 * [x] `createPayment`: Create a payment for certain order
-* [ ] `fetchPayments`: Get your exist payments
+* [ ] `paymentFetch`: Get your exist payments
 
 ### Before starting
 
 1. Sign up yosgo developer to get apiKey.
 2. Keep the apikey safe and use at server side.
+3. All method wrap with promise. You can get the response by `then((response) => //Do someting)`
 
 ### Usage
 

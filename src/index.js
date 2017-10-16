@@ -20,6 +20,24 @@ export default class Yosgo {
     return axiosInit;
   }
 
+  brandFetch() {
+    return new Promise((resolve, reject) => {
+      this.initialize().get('/brands').then((respones) => {
+        console.log('[Console] Fetch brands success -> ', respones.data);
+        resolve(respones.data);
+      })
+    })
+  }
+
+  productFetch() {
+    return new Promise((resolve, reject) => {
+      this.initialize().get('/products').then((response) => {
+        console.log('[Console] Fetch products success -> ', response.data);
+        resolve(response.data);
+      })
+    })
+  }
+
   orderCreate(productId, groupId, data, extraData, quantity) {
     return new Promise((resolve, reject) => {
       this.initialize().post('/orders', {
