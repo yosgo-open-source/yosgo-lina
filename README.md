@@ -58,7 +58,8 @@ script.
 * [x] Enable to create order with yosgo api
 * [x] Refactor with ES6
 * [x] Use classes ES6 to build sdk
-* [ ] Able to validate params of createOrder
+* [ ] Able to validate params of orderCreate
+* [ ] Able to pass page url to the paymentCreate
 
 ### Build npm module resources
 * [Basic docs](https://docs.npmjs.com/getting-started/creating-node-modules)
@@ -69,7 +70,6 @@ script.
 * [Npm link](https://docs.npmjs.com/cli/link)
 * [Npm package rename](https://stackoverflow.com/questions/28371669/renaming-a-published-npm-module)
 * [Promise note](http://www.cnblogs.com/rubylouvre/p/3495286.html)
-
 
 ### Dev note
 * Payment request should use at yosgo api production env.
