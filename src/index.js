@@ -75,8 +75,8 @@ export default class Yosgo {
           name: data.name,
           phone: data.phone,
           email: data.email,
-          notes: "",
-          address: ""
+          notes: data.notes,
+          address: data.address,
         },
         extraRegistrations,
         order: {
