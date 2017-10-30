@@ -105,7 +105,7 @@ export default class Yosgo {
     })
   }
 
-  paymentCreate(orderId) {
+  paymentCreate(orderId, next) {
     return new Promise((resolve, reject) => {
       this.createRequest().post('/orders/payment', {
         orderId

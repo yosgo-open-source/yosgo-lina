@@ -1,6 +1,6 @@
 {
   "name": "yosgo-lina",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "This project is for node.js to use yosgo-api easily",
   "main": "./dist/index.js",
   "scripts": {
