@@ -40,7 +40,7 @@ export default class Yosgo {
 
   productFetch(productId) {
     return new Promise((resolve, reject) => {
-      this.createRequest().get(`/products/${productId}`).then((response) => {
+      this.createRequest().get(`/products/${productId}/?forceUpdate=1`).then((response) => {
         console.log('[Console] Fetch certain product success');
         resolve(response.data.payload);
       })
@@ -61,7 +61,7 @@ export default class Yosgo {
 
   groupsFetch() {
     return new Promise((resolve, reject) => {
-      this.createRequest().get('/groups').then((response) => {
+      this.createRequest().get('/groups/?forceUpdate=1').then((response) => {
         console.log('[Console] Fetch groups success');
         resolve(response.data.payload);
       })
