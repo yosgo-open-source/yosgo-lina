@@ -1,16 +1,14 @@
 ### Brief
 Easy to play with yosgo-lina. You can
-* [x] `initialize`: Initialize api resquest
-* [ ] `createBrand`: Create your brands. Each brand has own products.
-* [ ] `brandFetch`: Get your exist own brands
-* [ ] `createrProduct`: Create your own proudct
-* [x] `productFetch`: Get your exist products
-* [ ] `createGroup`: Create a group
-* [ ] `groupFetch`: Get your exist groups
-* [x] `orderCreate`: Join the group and create a order
-* [ ] `orderFetch`: Get your exist orders
-* [x] `createPayment`: Create a payment for certain order
-* [ ] `paymentFetch`: Get your exist payments
+* [x] `createRequest`: Basic setup request
+* [x] `brandsFetch`: Get list of brands
+* [x] `productsFetch`: Get list of products
+* [x] `productsFetch(productId)`:
+* [x] `groupCreate`: Create a group from a product
+* [x] `groupFetch`: Get list of groups
+* [x] `orderCreate`: Create an order in a group
+* [x] `ordersFetch`: Get list of orders
+* [x] `paymentCreate`: Create a payment for a certain order
 
 ### Before starting
 
@@ -51,25 +49,3 @@ div(data=form id="data")
 script.
   document.write(document.getElementById('data').getAttribute('data'));
 ```
-
-### Todos
-* [x] Import success within other project and work
-* [x] Enable to create axios(init)
-* [x] Enable to create order with yosgo api
-* [x] Refactor with ES6
-* [x] Use classes ES6 to build sdk
-* [ ] Able to validate params of orderCreate
-* [ ] Able to pass page url to the paymentCreate
-
-### Build npm module resources
-* [Basic docs](https://docs.npmjs.com/getting-started/creating-node-modules)
-* [Create npm module example](https://quickleft.com/blog/creating-and-publishing-a-node-js-module/)
-* [Create npm module with ES6](https://booker.codes/how-to-build-and-publish-es6-npm-modules-today-with-babel/)
-* [Module ES6 export](http://www.cnblogs.com/diligenceday/p/5503777.html)
-* [Classes](https://googlechrome.github.io/samples/classes-es6/)
-* [Npm link](https://docs.npmjs.com/cli/link)
-* [Npm package rename](https://stackoverflow.com/questions/28371669/renaming-a-published-npm-module)
-* [Promise note](http://www.cnblogs.com/rubylouvre/p/3495286.html)
-
-### Dev note
-* Payment request should use at yosgo api production env.

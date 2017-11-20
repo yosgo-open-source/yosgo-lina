@@ -20,7 +20,7 @@ export default class Yosgo {
     return axiosInit;
   }
 
-  brandFetch() {
+  brandsFetch() {
     return new Promise((resolve, reject) => {
       this.createRequest().get('/brands').then((respones) => {
         console.log('[Console] Fetch brands success -> ', respones.data);
