@@ -1,94 +1,115 @@
-import axios from 'axios';
-// import R from 'ramda';
+const createRequest = require('./createRequest');
 
-export default class Yosgo {
-  constructor(baseApiURL, apiKey) {
-    this.baseApiURL = baseApiURL,
-    this.apiKey = apiKey,
-    this.createRequest = this.createRequest.bind(this)
+const successLog = msg =>
+  console.log('[YOSGO-SDK Console ' + new Date().toISOString() + '] ' + msg);
+
+class LINA {
+  constructor({ apiKey, mode }) {
+    this.apiKey = apiKey;
+    this.mode = mode;
   }
 
-  createRequest() {
-    const axiosInit = axios.create({
-      baseURL: this.baseApiURL,
-      timeout: 20000,
-      headers: {
-        'content-type': 'application/json',
-        'yosgo-api-key': this.apiKey
+  request() {
+    return createRequest({ apiKey: this.apiKey, mode: this.mode });
+  }
+
+  getBrands() {
+    return new Promise((resolve, reject) => {
+      this.request()
+        .get('/brands')
+        .then(respones => {
+          successLog('Fetch brands success');
+          resolve(respones.data);
+        });
+    });
+  }
+
+  getProducts({ id: productId } = { id: undefined }) {
+    return new Promise((resolve, reject) => {
+      if (productId) {
+        this.request()
+          .get(`/products/${productId}/?forceUpdate=1`)
+          .then(response => {
+            successLog('Fetch certain product success');
+            resolve(response.data.payload);
+          });
+      } else {
+        this.request()
+          .get('/products')
+          .then(response => {
+            successLog('Fetch products success');
+            resolve(response.data.payload);
+          });
       }
-    })
-    return axiosInit;
+    });
   }
 
-  brandsFetch() {
+  getGroups() {
     return new Promise((resolve, reject) => {
-      this.createRequest().get('/brands').then((respones) => {
-        console.log('[Console] Fetch brands success -> ', respones.data);
-        resolve(respones.data);
-      })
-    })
+      this.request()
+        .get('/groups/?forceUpdate=1')
+        .then(response => {
+          successLog('Fetch groups success');
+          resolve(response.data.payload);
+        });
+    });
   }
 
-  productsFetch() {
+  createGroup({ productId, note = '', ruleId = '' }) {
     return new Promise((resolve, reject) => {
-      this.createRequest().get('/products').then((response) => {
-        console.log('[Console] Fetch products success');
-        resolve(response.data.payload);
-      })
-    })
-  }
-
-  productFetch(productId) {
-    return new Promise((resolve, reject) => {
-      this.createRequest().get(`/products/${productId}/?forceUpdate=1`).then((response) => {
-        console.log('[Console] Fetch certain product success');
-        resolve(response.data.payload);
-      })
-    })
-  }
-
-  groupCreate(productId, note) {
-    return new Promise((resolve, reject) => {
-      this.createRequest().post('/groups', {
-        productId,
-        note,
-      }).then((responses) => {
-        console.log('[Console] Create Group Success');
-        resolve(responses);
-      })
-    })
-  }
-
-  groupsFetch() {
-    return new Promise((resolve, reject) => {
-      this.createRequest().get('/groups/?forceUpdate=1').then((response) => {
-        console.log('[Console] Fetch groups success');
-        resolve(response.data.payload);
-      })
-    })
-  }
-
-  orderCreate(productId, groupId, data, extraRegistrations, quantity) {
-    return new Promise((resolve, reject) => {
-      this.createRequest().post('/orders', {
-        registration: {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          notes: data.notes,
-          address: data.address,
-        },
-        extraRegistrations,
-        order: {
-          quantity,
+      this.request()
+        .post('/groups', {
           productId,
-          groupId
-        }
-      }).then((response) => {
-        console.log('[Console] Create order success');
-        resolve(response.data.payload.objectId);
-      })
-    })
+          note,
+          ruleId
+        })
+        .then(responses => {
+          successLog('Create Group Success');
+          resolve(responses);
+        });
+    });
+  }
+
+  getRules() {
+    return new Promise((resolve, reject) => {
+      this.request()
+        .get('/rules')
+        .then(response => {
+          successLog('Fetch rules success');
+          resolve(response.data.payload);
+        });
+    });
+  }
+
+  createRules({ rules }) {
+    return new Promise((resolve, reject) => {
+      this.request()
+        .post('/rules', {
+          rules
+        })
+        .then(responses => {
+          successLog('Create Rules Success');
+          resolve(responses);
+        });
+    });
+  }
+
+  createOrder({ id: productId, groupId, buyers, quantity }) {
+    return new Promise((resolve, reject) => {
+      this.request()
+        .post('/orders', {
+          buyers,
+          order: {
+            quantity,
+            productId,
+            groupId
+          }
+        })
+        .then(response => {
+          successLog('Create order success');
+          resolve(response.data.payload.objectId);
+        });
+    });
     // Validate
     // 1. Five params should be exist if not return required hint
     // 2. Quantity should be number if not return format hint
@@ -96,24 +117,30 @@ export default class Yosgo {
     // 4. Make sure group's quantity is enough or not
   }
 
-  ordersFetch() {
+  getOrders() {
     return new Promise((resolve, reject) => {
-      this.createRequest().get('/orders').then((response) => {
-        console.log('[Console] Fetch orders success');
-        resolve(response.data.payload);
-      })
-    })
+      this.request()
+        .get('/orders')
+        .then(response => {
+          successLog('Fetch orders success');
+          resolve(response.data.payload);
+        });
+    });
   }
 
-  paymentCreate(orderId, next) {
+  createPayment({ id: orderId, next = '' }) {
     return new Promise((resolve, reject) => {
-      this.createRequest().post('/orders/payment', {
-        orderId,
-        next
-      }).then((response) => {
-        console.log('[Console] Create payment success');
-        resolve(response.data.payload.order.payment.data.html);
-      })
-    })
+      this.request()
+        .post('/orders/payment', {
+          orderId,
+          next
+        })
+        .then(response => {
+          successLog('Create payment success');
+          resolve(response.data.payload.order.payment.data.html);
+        });
+    });
   }
 }
+
+module.exports = LINA;

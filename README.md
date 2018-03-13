@@ -1,5 +1,7 @@
 ### Brief
+
 Easy to play with yosgo-lina. You can
+
 * [x] `createRequest`: Basic setup request
 * [x] `brandsFetch`: Get list of brands
 * [x] `productsFetch`: Get list of products
@@ -12,9 +14,9 @@ Easy to play with yosgo-lina. You can
 
 ### Before starting
 
-1. Sign up yosgo developer to get apiKey.
-2. Keep the apikey safe and use at server side.
-3. All method wrap with promise. You can get the response by `then((response) => //Do someting)`
+1.  Sign up yosgo developer to get apiKey.
+2.  Keep the apikey safe and use at server side.
+3.  All method wrap with promise. You can get the response by `then((response) => //Do someting)`
 
 ### Usage
 
@@ -48,4 +50,16 @@ small=Redirect to ecpay
 div(data=form id="data")
 script.
   document.write(document.getElementById('data').getAttribute('data'));
+```
+
+### NEW
+
+```javascript
+const LINA = require('../src');
+
+const lina = new LINA({
+  apiKey: YOUR_API_KEY,
+  mode: 'test'
+});
+lina.getProducts().then(r => console.log(r));
 ```
