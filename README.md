@@ -63,3 +63,29 @@ const lina = new LINA({
 });
 lina.getProducts().then(r => console.log(r));
 ```
+
+### CHANGE API
+
+createRequest => move createRequest to outer file
+
+brandsFetch => getBrands
+
+productsFetch => getProducts(:id?)
+
+~~~productsFetch~~~
+
+groupCreate => createGroup
+
+groupFetch => getGroup
+
+orderCreate => createOrder
+
+ordersFetch => getOrders
+
+paymentCreate => createPayment
+
+### ADD API
+
+getRules
+
+createRules
