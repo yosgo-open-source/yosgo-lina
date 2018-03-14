@@ -1,7 +1,8 @@
 {
   "name": "yosgo-lina",
-  "version": "0.0.14",
-  "description": "This project is for node.js to use yosgo-api easily",
+  "version": "2.0.0",
+  "description":
+    "This SDK is for yosgo lina api. Easy way to develop LINA application",
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
