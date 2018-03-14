@@ -2,40 +2,53 @@
 
 This SDK is for yosgo lina api. Easy way to develop LINA application.
 
+All the API are async, so you should use Promise or async/await for the SDK.
+
+### Installation
+
+```
+> npm install yosgo-lina
+```
+
 ### Usage
 
 ```javascript
-const LINA = require('../src');
+const LINA = require('yosgo-lina');
 
 const lina = new LINA({
   apiKey: YOUR_API_KEY,
   mode: 'test'
 });
-lina.getProducts().then(r => console.log(r));
+
+lina.getProducts().then(response => console.log(response));
 ```
 
-### CHANGE API
+### API
 
-createRequest => move createRequest to outer file
+getBrands: Promise
 
-brandsFetch => getBrands
+#### Product
 
-productsFetch => getProducts(:id?)
+getProducts(:id?): Promise
 
-~~~productsFetch~~~
+#### Group
 
-groupCreate => createGroup
+createGroup: Promise
 
-groupFetch => getGroup
+getGroup: Promise
 
-orderCreate => createOrder
+#### Order
 
-ordersFetch => getOrders
+createOrder: Promise
 
-paymentCreate => createPayment
+getOrders: Promise
 
-### ADD API
+#### Payment
 
-getRules
+createPayment: Promise
 
-createRules
+#### Rule
+
+createRules: Promise
+
+getRules: Promise
