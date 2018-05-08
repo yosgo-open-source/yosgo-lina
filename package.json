@@ -1,6 +1,6 @@
 {
   "name": "yosgo-lina",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description":
     "This SDK is for yosgo lina api. Easy way to develop LINA application",
   "main": "./dist/index.js",

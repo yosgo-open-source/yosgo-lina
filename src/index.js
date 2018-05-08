@@ -44,10 +44,10 @@ class LINA {
     });
   }
 
-  getGroups() {
+  getGroups(isForceUpdate) {
     return new Promise((resolve, reject) => {
       this.request()
-        .get('/groups/?forceUpdate=1')
+        .get(`/groups/?forceUpdate=${isForceUpdate ? '1' : '0'}`)
         .then(response => {
           successLog('Fetch groups success');
           resolve(response.data.payload);
